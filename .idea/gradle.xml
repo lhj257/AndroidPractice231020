@@ -13,6 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/myapp_test6" />
             <option value="$PROJECT_DIR$/myapplication_test2" />
             <option value="$PROJECT_DIR$/myapplication_test3" />
             <option value="$PROJECT_DIR$/myapplication_test4" />
