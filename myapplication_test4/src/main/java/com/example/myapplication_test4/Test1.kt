@@ -6,7 +6,7 @@ class Test1 {
     companion object{
         fun test(menu: Menu){
             if(menu.lunch.equals("한식")||menu.lunch.equals("일식")||menu.lunch.equals("중식")){
-                println("그래서 뭐먹음")
+                println("구체적으로 대답")
             }else{
                 println("뭐함?")
             }
