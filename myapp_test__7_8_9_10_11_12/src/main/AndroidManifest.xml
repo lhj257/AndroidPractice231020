@@ -9,16 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication_231020_test1">
         <activity
-            android:name=".TestActivity"
+            android:name=".ch7_Test.TestActivity"
             android:exported="true" />
         <activity
-            android:name=".JoinActivity"
-            android:exported="true" />
-        <activity
-            android:name=".LoginFormActivity"
-            android:exported="true" />
-        <activity
-            android:name=".IntroActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
     </application>
 
 </manifest>
