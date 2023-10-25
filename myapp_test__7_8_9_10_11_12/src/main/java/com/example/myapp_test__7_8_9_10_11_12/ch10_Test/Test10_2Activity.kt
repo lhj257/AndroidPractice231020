@@ -16,10 +16,13 @@ import androidx.core.app.RemoteInput
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTest102Binding
 
 class Test10_2Activity : AppCompatActivity() {
+    //추가
     lateinit var activityTest102Binding: ActivityTest102Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityTest102Binding=ActivityTest102Binding.inflate(layoutInflater)
+        //추가
+        activityTest102Binding = ActivityTest102Binding.inflate(layoutInflater)
+        // 변경
         setContentView(activityTest102Binding.root)
 
         // 버튼의 요소를 선택해서, 알림을 보내는 로직을 추가할 예정.
@@ -115,5 +118,7 @@ class Test10_2Activity : AppCompatActivity() {
             //알림 발생 시키기
             manager.notify(11,builder.build())
         }
+
+
     }
 }
