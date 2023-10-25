@@ -1,13 +1,22 @@
 package com.example.myapp_test__7_8_9_10_11_12.ch9_Test
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowMetrics
+import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.myapp_test__7_8_9_10_11_12.R
@@ -19,6 +28,7 @@ class Test9Activity : AppCompatActivity() {
     // 단, build.gradle 에서 설정을 반드시 하고, (모듈버전에서)
     // 예) activity_test9 -> ActivityTest9Binding
     lateinit var activityTest9Binding: ActivityTest9Binding
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_test9)
@@ -43,6 +53,8 @@ class Test9Activity : AppCompatActivity() {
             val display=windowManager.defaultDisplay
         }
 
+
+        //10장
         // 허가 확인 여부 테스트
         val status = ContextCompat.checkSelfPermission(this@Test9Activity,
             "android.permission.ACCESS_FINE_LOCATION")
@@ -60,6 +72,8 @@ class Test9Activity : AppCompatActivity() {
         // 예2) 특정 앱에 접근을 해서, 데이터를 가져오는 작업(=후처리)
         // 설정1)
         val requestPermissionLauncher = registerForActivityResult(
+            //이 부분이 시스템에서 정해둔 함수들이 있음. 현재, 허가를 확인하는 용도.
+            // 나중에, 이미지 등 데이터에 접근해서, 해당 데이터를 가지고 오는 용도로 사용할 예정.
             ActivityResultContracts.RequestPermission()){
             isGranted ->
             if(isGranted){
@@ -68,8 +82,156 @@ class Test9Activity : AppCompatActivity() {
                 Log.d("lhj","권한 승인안됨, call back 후처리 요청.")
             }
         }
-        //이용
+        //이용 -> 호출, 위에 설정으로
         requestPermissionLauncher.launch("android.permission.ACCESS_FINE_LOCATION")
 
+        activityTest9Binding.testToastBtn?.setOnClickListener {
+            //기존 사용법
+//            Toast.makeText(this@Test9Activity,"후처리 확인중",Toast.LENGTH_LONG).show()
+            //콜백을 익명 클래스를 추가해서, 사라지거나, 또는 나타나거나 했을 경우 추가 로직 넣기.
+            val toast=Toast.makeText(this@Test9Activity,"후처리 확인중",Toast.LENGTH_LONG)
+            toast.addCallback(
+                object : Toast.Callback(){
+                    override fun onToastHidden() {
+                        super.onToastHidden()
+                        Log.d("lhj","토스트 후처리 작업: 사라질경우.")
+                    }
+                    override fun onToastShown() {
+                        super.onToastShown()
+                        Log.d("lsy","토스트 후처리 작업: 나타날 경우 ")
+                    }
+                }
+            )
+            toast.show()
+        }
+
+        // 날짜 다이얼 로그 출력 해보기.
+        activityTest9Binding.dateBtn?.setOnClickListener {
+            DatePickerDialog(this@Test9Activity, object : DatePickerDialog.OnDateSetListener{
+                override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+                    Log.d("lhj","년도: ${year}년, 월: ${month+1}, 일: ${dayOfMonth}")
+                    Toast.makeText(this@Test9Activity,"년도: ${year}년, 월: ${month+1}, 일: ${dayOfMonth}",Toast.LENGTH_SHORT).show()
+                    //텍스트 뷰에 설정해보기.
+                    activityTest9Binding.dateTextView?.text = "${year}년, 월: ${month+1}, 일: ${dayOfMonth}"
+                }
+            },2023,9,25).show()
+        }
+        //시간 다이얼로그 테스트 해보기
+        activityTest9Binding.timeBtn?.setOnClickListener {
+            TimePickerDialog(this@Test9Activity, object : TimePickerDialog.OnTimeSetListener{
+                override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+                    Log.d("lhj","${hourOfDay}시, ${minute}분")
+                    Toast.makeText(this@Test9Activity,"${hourOfDay}시, ${minute}분",Toast.LENGTH_SHORT).show()
+                    activityTest9Binding.timeTextView?.text = "${hourOfDay}시, ${minute}분"
+                }
+            },14,21,true).show()
+        }
+        //커스텀 마이징 한 다이얼로그 출력 해보기. 기본값
+        activityTest9Binding.customDialogBtn?.setOnClickListener {
+            AlertDialog.Builder(this@Test9Activity).run {
+                setTitle("커스텀 다이얼로그")
+                setIcon(android.R.drawable.ic_dialog_info)
+                setMessage("테스트 할까요?")
+                setPositiveButton("수락", null)
+                setNegativeButton("취소",null)
+                setNeutralButton("더보기",null)
+                show()
+            }
+        }
+
+        //목록 요소 선택1.
+        val items = arrayOf<String>("사과","바나나","수박","파인애플")
+        activityTest9Binding.customDialogBtn2?.setOnClickListener {
+            AlertDialog.Builder(this@Test9Activity).run {
+                setTitle("커스텀 다이얼로그2")
+                setIcon(android.R.drawable.ic_dialog_info)
+//                setMessage("테스트 할까요?")
+                //추가 사항
+                val objectListener = object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        Log.d("lhj","선택환 과일 :${items[which]}")
+                    }
+                }
+                setItems(items,objectListener)
+                setPositiveButton("수락", null)
+                setNegativeButton("취소",null)
+                setNeutralButton("더보기",null)
+                show()
+            }
+        }
+
+        //목록 요소 선택2.
+        activityTest9Binding.customDialogBtn3?.setOnClickListener {
+            AlertDialog.Builder(this@Test9Activity).run {
+                setTitle("커스텀 다이얼로그3")
+                setIcon(android.R.drawable.ic_dialog_info)
+//                setMessage("테스트 할까요?")
+                //추가 사항
+//                val objectListener = object : DialogInterface.OnClickListener{
+//                    override fun onClick(dialog: DialogInterface?, which: Int) {
+//                        Log.d("lhj","선택환 과일 :${items[which]}")
+//                    }
+//                }
+                //체크박스용 클릭 리스너,
+                val objectListener = object : DialogInterface.OnMultiChoiceClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int, isChecked: Boolean) {
+                        Log.d("lhj","${items[which]}이 ${if(isChecked)"선택됨" else "선택해제됨"}")
+                    }
+                }
+
+                //목록요소1
+//                setItems(items,objectListener)
+                //목록요소2
+                setMultiChoiceItems(items, booleanArrayOf(true,true,false,false),objectListener)
+                setPositiveButton("수락", null)
+                setNegativeButton("취소",null)
+                setNeutralButton("더보기",null)
+                show()
+            }
+        }
+        //목록 요소 선택3
+        activityTest9Binding.customDialogBtn4?.setOnClickListener {
+            AlertDialog.Builder(this@Test9Activity).run {
+                setTitle("커스텀 다이얼로그4")
+                setIcon(android.R.drawable.ic_dialog_info)
+                //체크박스용 클릭 리스너,
+//                val objectListener = object : DialogInterface.OnMultiChoiceClickListener{
+//                    override fun onClick(dialog: DialogInterface?, which: Int, isChecked: Boolean) {
+//                        Log.d("lhj","${items[which]}이 ${if(isChecked)"선택됨" else "선택해제됨"}")
+//                    }
+//                }
+                //라디오 클릭 리스너
+                val objectListener = object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        Log.d("lhj","선택한 과일 : ${items[which]}")
+                    }
+                }
+                //목록요소1
+//                setItems(items,objectListener)
+                //목록요소2
+//                setMultiChoiceItems(items, booleanArrayOf(true,true,false,false),objectListener)
+                //목록요소3
+                setSingleChoiceItems(items,1,objectListener)
+
+
+                setPositiveButton("수락", null)
+                setNegativeButton("취소",null)
+                setNeutralButton("더보기",null)
+                //뒤로가기 버튼을 눌려도, 알림창 닫아짐. 기본값.
+                //옵션으로 false 설정시, 창 닫힘 방지함
+                setCancelable(false)
+                show()
+                //다이얼로그창이 나타났을 경우, 창 밖을 클릭시
+                // 기본이 알림창을 닫기가 기본인데, false
+                // 창 밖을 클릭해도 창이 닫히지 않음.
+            }.setCanceledOnTouchOutside(false)
+        }
+
+        //소리 확인 테스트
+        activityTest9Binding.sountTestBtn?.setOnClickListener {
+            val notification: Uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val ringtone = RingtoneManager.getRingtone(applicationContext,notification)
+            ringtone.play()
+        }
     }
 }
