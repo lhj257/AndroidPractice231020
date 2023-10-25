@@ -91,7 +91,7 @@ class Test10_2Activity : AppCompatActivity() {
                 build()
             }
             val replyIntent = Intent(this@Test10_2Activity,ReplyReceiver::class.java)
-            val replyPendingIntent = PendingIntent.getBroadcast(this@Test10_2Activity,30,replyIntent,PendingIntent.FLAG_IMMUTABLE)
+            val replyPendingIntent = PendingIntent.getBroadcast(this@Test10_2Activity,30,replyIntent,PendingIntent.FLAG_MUTABLE)
             builder.addAction(
                 NotificationCompat.Action.Builder(
                     android.R.drawable.stat_notify_more,"답장",actionPendingIntent
