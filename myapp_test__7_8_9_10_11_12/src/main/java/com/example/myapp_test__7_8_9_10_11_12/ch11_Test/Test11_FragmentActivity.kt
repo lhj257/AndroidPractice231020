@@ -31,6 +31,14 @@ class Test11_FragmentActivity : AppCompatActivity() {
         transaction.add(R.id.fragment2,twoFragment)
         // 세번째 프래그먼트 붙이기
         transaction.add(R.id.fragment3,threeFragment)
+
+        //백스택, 화면을 출력시, Task라는 공간을 사용해서, (메모리 사용을함.)
+        //출력하고, 화면 전환이 발생할 경우, 매번 프래그먼트 소멸 시키고, 또 생성하고 이 작업이 반복이 되면,
+        // 자원이 비효율적, 그래서, 잠시, keep 가지고 있다가, 다시 그려주기(소멸 시키지 않고.)
+        // 액티비티에서도, 기존의 액티비티를 최대한 활용하는 방안으로 singleTop을 소개.
+        // 뷰 페이져 등을 이용해서, 프래그먼트 전환할 때 다시 재확인 하기.
+        transaction.addToBackStack(null)
+
         //화면에 출력하기
         transaction.commit()
 
