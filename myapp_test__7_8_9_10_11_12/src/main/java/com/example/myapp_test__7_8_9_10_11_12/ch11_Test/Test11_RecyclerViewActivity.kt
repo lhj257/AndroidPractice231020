@@ -34,6 +34,13 @@ class Test11_RecyclerViewActivity : AppCompatActivity() {
         // 구분선 넣기, 나중에 옵션으로 배경이미지도 넣기 가능.
         binding.recyclerView2.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
 
+        val layoutManager2=LinearLayoutManager(this)
+        layoutManager2.orientation= LinearLayoutManager.HORIZONTAL
+        binding.recyclerView3.layoutManager= layoutManager2
+        binding.recyclerView3.adapter = MyAdapter(datas)
+        // 구분선 넣기, 나중에 옵션으로 배경이미지도 넣기 가능.
+        binding.recyclerView3.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+
 
     }
 }
