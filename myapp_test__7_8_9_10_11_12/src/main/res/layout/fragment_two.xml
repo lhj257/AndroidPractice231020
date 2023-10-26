@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ch11_Test.TwoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:text="길을 잃는 다는 것은 곧 길을 알게 된다는 것이다- 동아프리카 속담"
+        android:background="#18A100"
+        style="@style/MyTextCss"/>
+
+</FrameLayout>

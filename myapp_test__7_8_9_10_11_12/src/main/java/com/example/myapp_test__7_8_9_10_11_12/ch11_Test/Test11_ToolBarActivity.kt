@@ -23,6 +23,14 @@ class Test11_ToolBarActivity : AppCompatActivity() {
         // 이식 작업
         //액션바에 업버튼 붙이기
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+        // 일반 텍스트뷰와(현재 sdk 24), 호환성을 고려한 뷰의 차이점 소개.
+        // lineHeight (sdk 28 버전이후로 추가된 기능.)
+        binding.testView.lineHeight = 50
+
+        // 호환성 고려한 텍스트 뷰에서, lineHeight 사용해보기.
+        binding.testCompView.lineHeight = 50
     }
     // 액션바 업버튼 클릭 이벤트 처리.
     override fun onSupportNavigateUp(): Boolean {
