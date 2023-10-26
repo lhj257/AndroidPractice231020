@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">MyApp_Test__7_8_9_10_11_12</string>
     <string name="app_intro">안녕하세요. 앱 테스팅!!</string>
+    <string name="long_text">행복은 습관이다 그것을 몸에 지니라-허버드, 길을 잃는다는 것은 곧 길을 안다는 것이다- 아프리카 속담, 피할 수 없으면 즐겨라- 로버트 엘리엇 </string>
 </resources>

@@ -4,15 +4,18 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.RemoteInput
+import com.example.myapp_test__7_8_9_10_11_12.R
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTest102Binding
 
 class Test10_2Activity : AppCompatActivity() {
@@ -35,12 +38,14 @@ class Test10_2Activity : AppCompatActivity() {
 
             // sdk 버전에 따라서, 분기, 기능의 패키지명 또는 구현 형식을 달라져서.
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // sdk 26버전 이후로, 1번 양식
                 //채널 설정
                 val channelId = "one-channel"
                 val channelName = "My Channel One"
                 val channel = NotificationChannel (
                     channelId,
                     channelName,
+                    // 전달하려는 메세지 전달 강도(레벨), 알림음 설정, 헤드업도 표시등. 강력하게 전달 하겠다.
                     NotificationManager.IMPORTANCE_HIGH
                 )
 
@@ -48,7 +53,11 @@ class Test10_2Activity : AppCompatActivity() {
                 channel.description = "My Channel One 설명"
                 // 알림의 갯수를 아이콘 표시
                 channel.setShowBadge(true)
+                // 채널에 시스템 알림을 설정 연결.
+                // uri, 음원, 이미지, 영상등의 위치를 알려주는 타입 보시면 됨.
+                // 예) http://도메인주소, 예) contents://경로
                 val uri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                Log.d("lhj", "uri의 위치가 어떻게 되니? : ${uri}")
                 val audioAttributes = AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .setUsage(AudioAttributes.USAGE_ALARM)
@@ -74,6 +83,7 @@ class Test10_2Activity : AppCompatActivity() {
             builder.setContentTitle("알림 제목")
             builder.setContentText("알림의 메세지 내용")
 
+            // 알림 옵션
             // 알림 메세지 창 클릭시, 페이지 이동. 기존에 사용했던 , 인텐트 방식과 비슷.
             val intent = Intent(this@Test10_2Activity,Test10_3Activity::class.java )
             val pendingIntent = PendingIntent.getActivity(this@Test10_2Activity,10,intent,
@@ -112,7 +122,45 @@ class Test10_2Activity : AppCompatActivity() {
                 ).addRemoteInput(remoteInput).build()
             )
 
+            //프로그레스 진행 바 확인 해보기.
+//            builder.setProgress(100,0,false)
+//            thread {
+//                for(i in 1..100){
+            //언제든지 완료된 작업량을 추정할 수 있는 경우 setProgress(max, progress, false)를 호출하여
+            // 그림 4와 같이 표시기의 '확정된' 형태를 사용하세요.
+            // 첫 번째 매개변수는 '완료' 값(예: 100)이고
+            // 두 번째 매개변수는 현재 진행률이며
+            // 마지막 매개변수는 이 진행률 표시줄이 확정된 진행률 표시줄임을 나타냅니다.
+            //
+            //작업이 진행되면 업데이트된 progress 값으로
+            // setProgress(max, progress, false)를 계속 호출하고 알림을 다시 발행합니다.
 
+//                    builder.setProgress(100,i,false)
+//                    manager.notify(11,builder.build())
+//                    SystemClock.sleep(100)
+//                }
+//            }
+
+            // 큰 이미지를 첨부해서 알림 보내기
+            // 안드로이드에서 사용하는 이미지 타입 비트맵, 바이트 등.
+            val bigPicture= BitmapFactory.decodeResource(resources, R.drawable.owl)
+            val bigStyle =NotificationCompat.BigPictureStyle()
+            bigStyle.bigPicture(bigPicture)
+            builder.setStyle(bigStyle)
+
+
+            // 긴텍스트
+            val bigTextStyle = NotificationCompat.BigTextStyle()
+            bigTextStyle.bigText(resources.getString(R.string.long_text))
+            builder.setStyle(bigTextStyle)
+
+            // 박스 스타일 형식
+            val boxStyle = NotificationCompat.InboxStyle()
+            boxStyle.addLine("1코스- 짜장면")
+            boxStyle.addLine("2코스- 우동")
+            boxStyle.addLine("3코스- 잡채밥")
+            boxStyle.addLine("4코스- 해물우동")
+            builder.setStyle(boxStyle)
 
 
             //알림 발생 시키기
