@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ItemRecyclerBinding
 
-//뷰를 모아둔 박스
+//뷰를 모아둔 박스 -> 목록 요소의 뷰
 class MyViewHolder(val binding : ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root)
 
 //뷰와 데이터 연결 한다.
+// 리사이클러뷰에서, 뷰페이저2에서도 같은 패턴으로 사용할 예정.
+// 지금은 더미 데이터: datas, 공공데이터 내지, 백에서 연결된 데이터
 class MyAdapter (val datas: MutableList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //리사이클러 뷰의 어댑터를 상속 받으면, 필수적으로 재정의 해야하는 함수들입니다.
     // 자동 완성으로 생성했음.

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.recycler.MyAdapter
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTest11RecyclerViewBinding
 
+//반드시, 흰색 도화지, 베이스, 이 액티비티 파일.
 class Test11_RecyclerViewActivity : AppCompatActivity() {
     lateinit var binding : ActivityTest11RecyclerViewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +15,9 @@ class Test11_RecyclerViewActivity : AppCompatActivity() {
         binding = ActivityTest11RecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //더미 데이터로 텍스트만 임시로 사용하지만,
+        //공공데이터, 사용자 정의한 데이터를 가지고 와서,
+        // 원하느 뷰에 데이터를 넣는, 바인딩 작업을 함.
         val datas= mutableListOf<String>()
         for(i in 1..10){
             datas.add("올빼미 $i")
@@ -24,6 +28,8 @@ class Test11_RecyclerViewActivity : AppCompatActivity() {
         val layoutManager=LinearLayoutManager(this)
         layoutManager.orientation= LinearLayoutManager.HORIZONTAL
         binding.recyclerView.layoutManager= layoutManager
+
+        //액티비티 -> 리사이클러뷰 -> 실제 데이터를 연결하는 부분. 중요!!!!
         binding.recyclerView.adapter = MyAdapter(datas)
         // 구분선 넣기, 나중에 옵션으로 배경이미지도 넣기 가능.
         binding.recyclerView.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
@@ -40,7 +46,6 @@ class Test11_RecyclerViewActivity : AppCompatActivity() {
         binding.recyclerView3.adapter = MyAdapter(datas)
         // 구분선 넣기, 나중에 옵션으로 배경이미지도 넣기 가능.
         binding.recyclerView3.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
-
 
     }
 }
