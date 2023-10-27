@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication_231020_test1">
         <activity
+            android:name=".ch11_Test.viewPager.TestViewPagerActivity"
+            android:exported="true" />
+        <activity
             android:name=".ch11_Test.recyclerDateTest.TestRecyclerDataActivity"
             android:exported="true" />
         <activity

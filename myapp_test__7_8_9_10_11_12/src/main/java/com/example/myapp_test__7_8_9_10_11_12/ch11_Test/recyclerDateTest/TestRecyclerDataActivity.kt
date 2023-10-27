@@ -3,9 +3,9 @@ package com.example.myapp_test__7_8_9_10_11_12.ch11_Test.recyclerDateTest
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.recycler.MyAdapter
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTestRecyclerDataBinding
 
@@ -34,18 +34,23 @@ class TestRecyclerDataActivity : AppCompatActivity() {
         // 3) StaggeredGridLayoutManager()
         //---------------------------------------------------------
         val linearLayoutManager = LinearLayoutManager(this as Context)
-        val gridLayoutManager = GridLayoutManager(this, 3,GridLayoutManager.HORIZONTAL,false)
+        val gridLayoutManager = GridLayoutManager(this, 3,GridLayoutManager.HORIZONTAL,true)
+        val staggeredoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         // 리니어, 수직, 수평 방향으로 출력
         recyclerView.layoutManager = linearLayoutManager // LayoutManager 설정
         //그리드, 테이블 형식으로 출력하기
-        recyclerView.layoutManager = gridLayoutManager // GridManager 설정
+//        recyclerView.layoutManager = gridLayoutManager // GridManager 설정
+        //지그 재그
+//        recyclerView.layoutManager = staggeredoutManager // StaggeredManager 설정
+
+        // 리사이클러 뷰의 꾸미기 담당 클래스를 붙이는 작업. (적용)
+        recyclerView.addItemDecoration(MyDecoration(this))
 
 
 //        val customAdapter = CustomAdapter(testDataSet)
         // 만들어 둔 어댑터를 붙이는 작업.
         val customAdapter = MyAdapter(testDataSet)
         recyclerView.adapter = customAdapter // 어댑터 설정
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
 
 
         //===== [데이터 추가/삭제 기능을 위해 추가된 코드] ===========
