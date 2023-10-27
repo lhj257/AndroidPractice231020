@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ch11_Test.viewPager.fragment.SampleFrag3">
+    tools:context=".ch11_Test.viewPager.fragment.Sample2Frag1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,15 +13,14 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/owl"/>
+            android:src="@drawable/cat"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="올빼미"
+            android:text="행복은 습관이다. 그것을 몸에 지니라 -허버드"
             style="@style/MyTextCss"/>
 
     </LinearLayout>
-
 
 </FrameLayout>

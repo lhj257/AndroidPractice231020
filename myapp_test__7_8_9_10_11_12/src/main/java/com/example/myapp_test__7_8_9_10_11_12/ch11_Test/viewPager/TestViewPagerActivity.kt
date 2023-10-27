@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.recycler.MyAdapter
 import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.recycler.MyAdapter2
 import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.viewPager.adapter.MyFragmentPagerAdapter
+import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.viewPager.adapter.MyFragmentPagerAdapter2
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTestViewPagerBinding
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ItemPagerBinding
 
@@ -26,6 +30,11 @@ class TestViewPagerActivity : AppCompatActivity() {
         // 외부 기능이니 디펜던시 build.gradle 에 복사후 , sync now 해서 ,
         //뷰페이저2 출력 방식 2가지, 1) 어댑터 사용방법 2) 프래그먼트 이용
 
+        val datas= mutableListOf<String>()
+        for(i in 1..20){
+            datas.add("올빼미 $i")
+        }
+
 // 테스트 진행중 방법1) 어댑터 ,
 // 문제점은, 어댑터 구조는 똑같은데, 데이터 똑같고, 아이템의 요소의 뷰의 형식이 다름.
 //        binding.viewPager1.adapter = MyPagerAdapter(testDataSet)
@@ -34,6 +43,17 @@ class TestViewPagerActivity : AppCompatActivity() {
         // 방법2 , 프래그먼트 형식으로 뷰페이저 구성.
         // 준비물, 1) 프래그먼트 형식의 어댑터 2) 요소로 사용이될 프래그먼트 3개정도 만들기.
         binding.viewPager2.adapter=MyFragmentPagerAdapter(this)
+        //뷰페이저3 프래그먼트
+        binding.viewPager3.adapter= MyFragmentPagerAdapter2(this)
+
+        //리사이클러뷰
+        binding.recyclerView.layoutManager= LinearLayoutManager(this)
+        binding.recyclerView.adapter = MyAdapter(datas)
+        // 구분선 넣기, 나중에 옵션으로 배경이미지도 넣기 가능.
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(this,
+                LinearLayoutManager.VERTICAL)
+        )
 
     }
 
