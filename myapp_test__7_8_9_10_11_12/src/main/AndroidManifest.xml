@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication_231020_test1">
         <activity
+            android:name=".ch11_Test.viewpageandrecyclerview.TestPageRecycler2Activity"
+            android:exported="true" />
+        <activity
             android:name=".ch11_Test.viewpageandrecyclerview.TestPageRecyclerActivity"
             android:exported="true" />
         <activity

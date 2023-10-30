@@ -1,45 +1,34 @@
 package com.example.myapp_test__7_8_9_10_11_12.ch11_Test.viewpageandrecyclerview
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp_test__7_8_9_10_11_12.R
-import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.recycler.MyAdapter
 import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.viewpageandrecyclerview.adapter.RecyclerViewTest
 import com.example.myapp_test__7_8_9_10_11_12.ch11_Test.viewpageandrecyclerview.adapter.ViewPageAdapterTest
-import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTestPageRecyclerBinding
-import com.example.myapp_test__7_8_9_10_11_12.databinding.ToolbarMainLayoutBinding
+import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTestPageRecycler2Binding
 
-class TestPageRecyclerActivity : AppCompatActivity() {
-    lateinit var binding: ActivityTestPageRecyclerBinding
-    lateinit var bindingToolBarBinding: ToolbarMainLayoutBinding
+class TestPageRecycler2Activity : AppCompatActivity() {
+    lateinit var binding: ActivityTestPageRecycler2Binding
     var newDataNumber = 11
     // 액션 버튼 토글(스위치), 서랍화면 나오게 하는 버튼.
     lateinit var toggle : ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTestPageRecyclerBinding.inflate(layoutInflater)
-        bindingToolBarBinding = ToolbarMainLayoutBinding.inflate(layoutInflater)
+        binding = ActivityTestPageRecycler2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //1)툴바 , 2) 드로워 3) 드러워-네비게이션 4) 플로팅 액션 버튼
         // 5) 앱바 6) 탭레이아웃
 
         //1) 툴바 붙이기, Test11_ToolBarActivity 재사용
-//        setSupportActionBar(binding.toolbar)
-
-        //툴바 고정1
-        // 사용자가 직접 만든 툴바 레이아웃에, 이벤트 추가하기.
-        val toobar2 : androidx.appcompat.widget.Toolbar = findViewById(R.id.maintoolbar)
-        setSupportActionBar(toobar2)
-
-
+        setSupportActionBar(binding.toolbar)
 
         //1)-2 ,툴바 오버플로우 메뉴 붙이기
         // 재료 , res -> 메뉴 toolbar_menu, 재사용함.
@@ -55,19 +44,19 @@ class TestPageRecyclerActivity : AppCompatActivity() {
         binding.mainDrawerView.setNavigationItemSelectedListener {
                 it ->
             if (it.title == "로그인") {
-                Toast.makeText(this@TestPageRecyclerActivity,"로그인 화면 이동",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@TestPageRecycler2Activity,"로그인 화면 이동", Toast.LENGTH_SHORT).show()
             }
             else if (it.title == "로그아웃") {
-                Toast.makeText(this@TestPageRecyclerActivity,"로그아웃 화면 이동",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@TestPageRecycler2Activity,"로그아웃 화면 이동", Toast.LENGTH_SHORT).show()
             }
             else if (it.title == "메인가기") {
-                Toast.makeText(this@TestPageRecyclerActivity,"메인가기 화면 이동",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@TestPageRecycler2Activity,"메인가기 화면 이동", Toast.LENGTH_SHORT).show()
             }
             true
         }
 
         // 드로워 화면에 액션 버튼 클릭시 -> 드로워 화면에 나오게.
-        toggle = ActionBarDrawerToggle(this@TestPageRecyclerActivity,
+        toggle = ActionBarDrawerToggle(this@TestPageRecycler2Activity,
             binding.drawer,R.string.open,R.string.close)
         // 화면에 붙이는 작업, 적용하기.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -81,7 +70,7 @@ class TestPageRecyclerActivity : AppCompatActivity() {
                 true -> binding.floatingActionButton.shrink()
                 false -> binding.floatingActionButton.extend()
             }
-            Toast.makeText(this@TestPageRecyclerActivity,"floatingActionButton 클릭됨", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@TestPageRecycler2Activity,"floatingActionButton 클릭됨", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -90,7 +79,7 @@ class TestPageRecyclerActivity : AppCompatActivity() {
         // 여기에 뷰페이저와, 리사이클러뷰 2개를 붙이 예정.
 
         //뷰페이저2 준비물 1)프래그먼트 어댑터 2) 목록요소 , 프래그먼트 3개 필요. 3) 더미 데이터(=자기자신)
-        binding.viewPager1.adapter =ViewPageAdapterTest(this)
+        binding.viewPager1.adapter = ViewPageAdapterTest(this)
 
         // 리사이클러뷰 붙이기
         // 준비물) 1) 리사이클러뷰 어댑터 2)목록요소의 아이템 뷰 3) 더미 데이터
@@ -100,7 +89,7 @@ class TestPageRecyclerActivity : AppCompatActivity() {
         }
         // 출력 방향, 리니어 나란히 수직으로
         val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+//        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
 //        val layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false)
 
@@ -144,15 +133,15 @@ class TestPageRecyclerActivity : AppCompatActivity() {
             return true
             // 오버 플로우 메뉴의 클릭시 이벤트를 ,
         } else if ( R.id.menu_toolbar1 == item.itemId) {
-            Toast.makeText(this@TestPageRecyclerActivity,"툴바메뉴1 클릭됨", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@TestPageRecycler2Activity,"툴바메뉴1 클릭됨", Toast.LENGTH_SHORT).show()
             true
         }
         else if ( R.id.menu_toolbar2 == item.itemId) {
-            Toast.makeText(this@TestPageRecyclerActivity,"툴바메뉴2 클릭됨", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@TestPageRecycler2Activity,"툴바메뉴2 클릭됨", Toast.LENGTH_SHORT).show()
             true
         }
         else if ( R.id.menu_toolbar3 == item.itemId) {
-            Toast.makeText(this@TestPageRecyclerActivity,"툴바메뉴3 클릭됨", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@TestPageRecycler2Activity,"툴바메뉴3 클릭됨", Toast.LENGTH_SHORT).show()
             true
         }
 
@@ -205,7 +194,7 @@ class TestPageRecyclerActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // 검색어가 제출이 되었을 경우, 연결할 로직.
                 // 사용자 디비, 검색을하고, 그 결과 뷰를 출력하는 형태.
-                Toast.makeText(this@TestPageRecyclerActivity,"검색어가 전송됨 : ${query}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@TestPageRecycler2Activity,"검색어가 전송됨 : ${query}", Toast.LENGTH_SHORT).show()
                 return true
             }
         })
