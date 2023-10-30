@@ -16,6 +16,15 @@ class TestPageRecyclerActivity : AppCompatActivity() {
         binding = ActivityTestPageRecyclerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //1)툴바 2)드로워  3) 드로워-네비게이션  4) 플로팅 액션 버튼
+        //5) 앱바  6)탭 레이아웃
+
+        //1) 툴바 붙이기, Test11_ToolVarActivity 재사용
+        setSupportActionBar(binding.toolbar)
+
+
+
+
         // 뷰페이저2 프래그먼트 어댑터 이용해서 출력해보기.
         //현재 액티비티 도화지, 캔버스, 기본화면.
         // 여기에 뷰페이저와 리사이클러뷰 두개를 붙일 예정.
