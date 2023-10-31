@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         binding.joinBtn.setOnClickListener {
             // intent는 시스템에 메세지를 전달하는 용도로 사용도 하지만,
             // 일단, 액티비티 간 화면 이동으로 잠시 사용하기.
-            val intent = Intent(this@MainActivitylhj, JoinActivity::class.java)
+            val intent = Intent(this@MainActivity, JoinActivity::class.java)
             // 이 함수 이용해서, 2번째 화면으로 이동하는함.
             startActivity(intent)
         }
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         // 클릭시 이벤트 리스너 이용해서, 해당 화면으로 이동.
         loginBtn.setOnClickListener {
-            val intent = Intent(this@MainActivitylhj, LoginFormActivity::class.java)
+            val intent = Intent(this@MainActivity, LoginFormActivity::class.java)
             startActivity(intent)
         }
 
