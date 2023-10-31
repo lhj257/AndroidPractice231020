@@ -21,3 +21,4 @@ include(":myapplication_test4")
 include(":myapp_test6")
 include(":myapp_test__7_8_9_10_11_12")
 
+include(":mypractice")
