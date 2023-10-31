@@ -18,7 +18,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".ch11_Test.ViewTest2Activity">
+        tools:context=".ch11_12_Test.ViewTest2Activity">
 
 
         <LinearLayout
@@ -52,9 +52,7 @@
                     app:expandedTitleMarginStart="50dp"
                     app:expandedTitleTextColor="@color/main_text_color"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:title="AppBar Title"
-
-                    >
+                    app:title="AppBar Title">
                     <!--app:contentScrim="#03A9F4": 한줄로 표시가 되었을 경우 나타나는 색깔-->
 
                     <ImageView
@@ -69,9 +67,7 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        app:layout_collapseMode="pin"
-
-                        />
+                        app:layout_collapseMode="pin"/>
 
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
