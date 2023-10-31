@@ -1,6 +1,7 @@
 package com.example.myapp_test__7_8_9_10_11_12.ch13_Test
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityTestBundleBinding
 
@@ -9,6 +10,7 @@ class TestBundleActivity : AppCompatActivity() {
     var count=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("lhj","onCreate()")
         binding =ActivityTestBundleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,5 +44,30 @@ class TestBundleActivity : AppCompatActivity() {
         val data1= savedInstanceState.getString("data1")
         val data2=savedInstanceState.getInt("data2")
         binding.resultText.text="$data1 - $data2"
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("lhj","onStart()")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("lhj","onResume()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("lhj","onPause()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("lhj","onStop()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("lhj","onDestroy()")
     }
 }
