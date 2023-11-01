@@ -18,21 +18,22 @@ import java.util.Date
 
 class TestImageActivity : AppCompatActivity() {
     // 갤러리, 카메라 앱 연동해서 데이터 가져오기.
-    lateinit var binding : ActivityTestImageBinding
-    lateinit var filePath:String
+    lateinit var binding: ActivityTestImageBinding
+    lateinit var filePath : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityTestImageBinding.inflate(layoutInflater)
+        binding = ActivityTestImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //작업의 구성 2가지.
-        // 첫번째, 갤러리 앱을 호출하는 작업
-        // 두번째, 갤러리 앱에서 데이터를 가져온 내용을 처리하는 작업.
+        //작업 구성 2가지.
+        // 첫번째, 갤러리 앱을 호출 하는 작업
+        // 두번째, 갤러리 앱에 데이터를 가져온 내용을 처리하는 작업.
 
 
-        // 갤러리 에서 선택이 된 사진을 출력하는 뷰하나 생성.
+        // 갤러리에서 선택 된 사진을 출력하는 뷰하나 생성.
 
-        // 두번째, 갤러리 앱에서 데이터를 가져온 내용을 처리하는 작업.
+
+        // 두번째, 갤러리 앱에 데이터를 가져온 내용을 처리하는 작업.
         val requestGalleryLauncher = registerForActivityResult(
             // 지금 정의하는 부분은 시스템에서 각 사용처 마다 정의가 다 되어 있고,
             // 골라서 사용할 예정. , 현재는 외부앱 에서 데이터 가져오는 역할부분을 이용할 예정.
@@ -77,11 +78,11 @@ class TestImageActivity : AppCompatActivity() {
                 // 지금, 그냥 출력하지만, 비동기식으로 처리하는 glide 라는 라이브러리를 주로 이용할 예정.
                 binding.resultUserImage.setImageBitmap(bitmap)
 
-                Log.d("lhj","갤러리에서 선택된 사진의 크기 비율 calRatio : $calRatio")
+                Log.d("lsy","갤러리에서 선택된 사진의 크기 비율 calRatio : $calRatio")
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.d("lhj", "사진 출력 실패")
+                Log.d("lsy", "사진 출력 실패")
 
             }
 
@@ -99,50 +100,53 @@ class TestImageActivity : AppCompatActivity() {
             // requestGalleryLauncher: 아직 후처리 함수 정의 안했음.
             requestGalleryLauncher.launch(intent)
 
+        }
 
-            //카메라 호출해서, 사진 촬영된 사진 가져오기.
-            // 1) 카메라 호출하는 버튼 , 액션 문자열로 카메라 외부앱 연동.
+        //카메라 호출해서, 사진 촬영된 사진 가져오기.
+        // 1) 카메라 호출하는 버튼 , 액션 문자열로 카메라 외부앱 연동.
 
-            // 2) 후처리하는 함수를 이용해서, 촬영된 사진을 결과 뷰에 출력하는 로직.
-
-            val requestCameraFileLauncher = registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult()
-            ) {
-                //it , 카메라로 촬영된 사진이 들어 있음.
-                // 원본 사진 크기 조절하는 비율 단위(정수값)
-                // 사진을 AVD 가상머신을 넣을 때 어느정도 비율이 줄어들었음.
-                val calRatio = calculateInSampleSize(
-                    Uri.fromFile(File(filePath)),
-                    resources.getDimensionPixelSize(R.dimen.progile_img_width),
-                    resources.getDimensionPixelSize(R.dimen.progile_img_height),
-                )
-                // 크기 옵션을 담을 인스턴스 생성.
-                val options = BitmapFactory.Options()
-                options.inSampleSize = calRatio
-                // 촬영된 사진을 bitmap 타입으로 변환.
-                val bitmap = BitmapFactory.decodeFile(filePath,options)
-                // 비트맵 타입으로 변환된 사진을 출력하기 결과 뷰에
-                binding.resultUserImage.setImageBitmap(bitmap)
+        // 2) 후처리하는 함수를 이용해서, 촬영된 사진을 결과 뷰에 출력하는 로직.
 
 
-            }
+        val requestCameraFileLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            //it , 카메라로 촬영된 사진이 들어 있음.
+            // 원본 사진 크기 조절하는 비율 단위(정수값)
+            // 사진을 AVD 가상머신을 넣을 때 어느정도 비율이 줄어들었음.
+            val calRatio = calculateInSampleSize(
+                Uri.fromFile(File(filePath)),
+                resources.getDimensionPixelSize(R.dimen.progile_img_width),
+                resources.getDimensionPixelSize(R.dimen.progile_img_height),
+            )
+            // 크기 옵션을 담을 인스턴스 생성.
+            val options = BitmapFactory.Options()
+            options.inSampleSize = calRatio
+            // 촬영된 사진을 bitmap 타입으로 변환.
+            val bitmap = BitmapFactory.decodeFile(filePath,options)
+            // 비트맵 타입으로 변환된 사진을 출력하기 결과 뷰에
+            binding.resultUserImage.setImageBitmap(bitmap)
+
+
+        }
 
         binding.cameraBtn.setOnClickListener {
-            //사진이 촬영이되고, 저장이 될 때, 파일 이름을 정하기.
-            //중복이 안되게끔 이름을 작성, UUID를 많이 쓰는데,
-            // 일단 날짜를 기준으로 사진의 파일명을 구분 짓기.
+            // 사진이 촬영이되고, 저장이될 때, 파일이름을 정하기.
+            // 중복이 안되게끔 이름을 작성, UUID를 많이 쓰는데,
+            // 일단, 날짜를 기준으로 사진의 파일명을 구분 짓기.
 
             //파일 이름 준비하기.
-            val timeStamp : String=
+            val timeStamp : String =
                 SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 
-            //촬영된 사진의 저장소 위치 정하기.
-            val storageDir: File?= getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            // 촬영된 사진의 저장소 위치 정하기.
+            // Environment.DIRECTORY_PICTURES : 정해진 위치, 갤러리
+            val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
-            // 위에서 만든 파일이름과, 저장소 위치에 실제 물리 파일 생성하기.
+            // 위에서 만든 파일이름과, 저장소위치에 실제 물리 파일 생성하기.
             // 빈 파일.
-            val file =File.createTempFile(
-                "JPEG ${timeStamp}_",
+            val file = File.createTempFile(
+                "JPEG_${timeStamp}_",
                 ".jpg",
                 storageDir
             )
@@ -150,29 +154,28 @@ class TestImageActivity : AppCompatActivity() {
             // 실제 사진 파일 저장소 위치 정의 , 절대 경로
             // 전역으로 빼기.
             // 위에서 선언만하고, 실제 파일위치가 나올 이 때, 할당을 하는 구조.
-            filePath=file.absolutePath
-            Log.d("lhj","file.absolutePath : $filePath")
+            filePath = file.absolutePath
+            Log.d("lsy","file.absolutePath : $filePath")
 
-            //콘텐츠 프로바이더를 이용해서 데이터를 가져와야 함.
+            //콘텐츠 프로바이더를 이용해서, 데이터를 가져와야 함.
+            // provider에서 정한 authorities 값이 필요함.
+            // 매니페스트 파일에 가서,
             val photoURI : Uri = FileProvider.getUriForFile(
-                this,
-                //provider에서 정한 authorities 값이 필요함.
-                //매니세스트 파일에 가서
-                "com.example.test1234",
+                this@TestImageActivity,
+                "com.example.myapp_test_7_8_9_10_11_12.fileprovider",
                 file
             )
-            //카메라를 촬영하는 정해진 액션 문자열
+            // 카메라를 촬영하는 정해진 액션 문자열
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            //인텐트 데이터를 담아서 전달.
-            // 키 : MediaStore.EXTRA_OUTPUT, 값 : photoURI
-            intent.putExtra(MediaStore.EXTRA_OUTPUT,photoURI)
+            // 인텐트 데이터를 담아서 전달.
+            // 키: MediaStore.EXTRA_OUTPUT , 값 : photoURI
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             // 후처리 함수로 촬영된 사진을 처리하는 로직.
             // 아직 정의 되지 않았음.
             requestCameraFileLauncher.launch(intent)
-        }
-
 
         }
+
 
     }
     // onCreate
@@ -207,7 +210,7 @@ class TestImageActivity : AppCompatActivity() {
             inputStream = null
         } catch (e:Exception) {
             e.printStackTrace()
-            Log.d("lhj", "사진 크기 비율 계산 실패 ")
+            Log.d("lsy", "사진 크기 비율 계산 실패 ")
         }
         // 비율 계산
         val (height : Int, width: Int) = options.run { outHeight to outWidth }
