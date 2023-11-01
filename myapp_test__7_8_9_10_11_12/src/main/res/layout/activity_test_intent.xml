@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ch13_Test.TestIntentActivity">
@@ -16,9 +20,27 @@
             android:id="@+id/emailEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:hint="이메일 입력해주세요."
             style="@style/MyTextCss"
             android:inputType="text"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/showEditBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="show"/>
+        <Button
+            android:id="@+id/hideEditBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="hide"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/passwordEdit"
@@ -55,6 +77,14 @@
             android:layout_height="wrap_content"
             android:text="후처리 방법2 테스트"/>
 
+        <TextView
+            android:id="@+id/resultData1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="30sp"
+            />
+
         <Button
             android:id="@+id/testBtn4"
             android:layout_width="wrap_content"
@@ -68,13 +98,19 @@
             android:text="인텐트 필터를 이용한 크롬 연동"/>
 
         <TextView
-            android:id="@+id/resultData1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:background="@color/main_text_color"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#FF00E5"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#00FF0D"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

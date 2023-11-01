@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +19,24 @@ class TestIntentActivity : AppCompatActivity() {
 //    lateinit var age : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("lhj","onCreate()")
         binding = ActivityTestIntentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d("lhj","onCreate()")
+
+        //소프트 키보드 제어 해보기. 버튼 이용해서,
+        val manager =getSystemService(INPUT_METHOD_SERVICE)as InputMethodManager
+        binding.showEditBtn.setOnClickListener {
+            //에디트 텍스뷰에 강제로 포커스 주기
+            binding.emailEdit.requestFocus()
+            //매니져 이용해서, 소프트 키보드 보여주기 제어
+            manager.showSoftInput(binding.emailEdit,InputMethodManager.SHOW_IMPLICIT)
+        }
+        //hide
+        binding.hideEditBtn.setOnClickListener {
+            manager.hideSoftInputFromWindow(currentFocus?.windowToken,InputMethodManager.HIDE_NOT_ALWAYS)
+        }
+
+
 
 
         // 인텐트에 기본 데이터 추가 및 가져오기 테스트.

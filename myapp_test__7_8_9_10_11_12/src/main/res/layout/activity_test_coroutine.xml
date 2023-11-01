@@ -5,33 +5,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ch13_Test.TestBundleActivity">
+    tools:context=".ch13_Test.TestCoroutineActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/resultText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="30sp"/>
-
         <Button
-            android:id="@+id/countBtn"
+            android:id="@+id/testCoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="증가"
-            android:textSize="30sp"/>
+            android:text="test"/>
 
         <TextView
-            android:id="@+id/resultText2"
+            android:id="@+id/resultCoView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="30sp"/>
+            android:text="resultBiew"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="화면 터치 유무 확인 뷰"/>
 
     </LinearLayout>
 
