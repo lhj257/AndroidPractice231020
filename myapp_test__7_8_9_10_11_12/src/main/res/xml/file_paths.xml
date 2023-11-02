@@ -3,6 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <external-path
         name="myfiles"
-        path="Android/data/com.example.myapp_test_7_8_9_10_11_12/files/Pictures"/>
+        path="Android/data/com.example.myapp_test__7_8_9_10_11_12/files/Pictures"/>
 
 </paths>
