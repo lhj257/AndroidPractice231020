@@ -20,7 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication_231020_test1">
         <activity
-            android:name="com.example.myapp_test__7_8_9_10_11_12.ch16_Test.MultiImageRecyclerActivity"
+            android:name=".ch17_Test.SQLiteTest.DbTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ch16_Test.MultiImageRecyclerActivity"
             android:exported="true" />
         <activity
             android:name=".ch16_Test.TestImageActivity"
