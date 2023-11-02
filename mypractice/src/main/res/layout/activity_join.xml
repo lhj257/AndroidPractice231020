@@ -64,7 +64,7 @@
         android:textSize="20sp"
         android:layout_marginLeft="10dp"/>
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/userPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="패스워드를 입력하기."
@@ -83,13 +83,14 @@
         android:inputType="textPassword"
         android:layout_marginLeft="10dp"/>
     <TextView
-        android:id="@+id/editTextName"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="name을 입력해주세요."
         android:textSize="20sp"
         android:layout_marginLeft="10dp"/>
     <EditText
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="name을 입력하기."
@@ -102,7 +103,7 @@
         android:textSize="20sp"
         android:layout_marginLeft="10dp"/>
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/userEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="email을 입력하기."

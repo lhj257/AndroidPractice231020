@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.example.mypractice.databinding.ActivityJoinBinding
@@ -18,10 +20,24 @@ import java.util.Date
 class JoinActivity : AppCompatActivity() {
     lateinit var binding:ActivityJoinBinding
     lateinit var filePath : String
+
+    //회원가입 추가 부분
+    var myDB: DatabaseHelper? = null
+    var buttonInsert : Button? = null
+    var editTextEmail: EditText? = null
+    var editTextPassword: EditText? = null
+    var editTextName: EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityJoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //회원가입 내용 SQLite 넣기
+        myDB = DatabaseHelper(this)
+        buttonInsert = binding.joinBtn
+        editTextEmail = binding.userEmail
+        editTextPassword = binding.userPassword
+        editTextName = binding.userName
         //작업 구성 2가지.
         // 첫번째, 갤러리 앱을 호출 하는 작업
         // 두번째, 갤러리 앱에 데이터를 가져온 내용을 처리하는 작업.
