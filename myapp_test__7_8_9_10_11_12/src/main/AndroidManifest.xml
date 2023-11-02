@@ -21,7 +21,7 @@
         android:theme="@style/Theme.MyApplication_231020_test1">
         <activity
             android:name=".ch17_Test.SQLiteTest.DbTestActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ch16_Test.MultiImageRecyclerActivity"
             android:exported="true" />

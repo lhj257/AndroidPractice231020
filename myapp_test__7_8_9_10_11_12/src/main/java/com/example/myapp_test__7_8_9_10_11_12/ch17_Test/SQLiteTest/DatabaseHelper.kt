@@ -53,6 +53,8 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper
     }
 
     //데이터베이스 항목 읽어오기 Read
+    // allData, 데이터베이스의 조회한 값이 테이블 형태로 들어 있다고 생각하면 됨.
+    // Cursor -> 테이블
     val allData: Cursor
         get() {
             val db = this.writableDatabase
