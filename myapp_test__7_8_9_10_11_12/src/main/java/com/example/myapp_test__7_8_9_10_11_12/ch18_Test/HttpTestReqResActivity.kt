@@ -80,6 +80,8 @@ class HttpTestReqResActivity : AppCompatActivity() {
         //    }
         //}
 
+        //작업순서2 : 네트워크 인터페이스 정의하기.
+
 
     }
     //on Create
