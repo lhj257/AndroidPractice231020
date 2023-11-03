@@ -82,6 +82,14 @@ class HttpTestReqResActivity : AppCompatActivity() {
 
         //작업순서2 : 네트워크 인터페이스 정의하기.
 
+        //작업순서3 : MyApplication, baseurl 등록, 우리가 만든 인터페이스 연결.
+        //매니페스트에 등록해서, 앱이 실행시, 선언 및 초기화 자동으로 되고,
+        // 바로 사용만 하면 됨.
+
+        //작업순서4: 일단, retrofit 통신 이용해서 데이터가 전달 유무 확인.
+
+        //작업순서5 : 리사이클러뷰에 넣는 작업. (재사용)
+
 
     }
     //on Create
