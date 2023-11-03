@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 // 메모리 등록이 되어서 사용하기 편함.
 class MyApplication2 :Application(){
 
-    companion object {
+
         val QUERY = "travel"
         val QUERY2 = "Apple"
         val from ="2023-05-22"
@@ -30,6 +30,6 @@ class MyApplication2 :Application(){
         init {
             networkService = retrofit.create(INetworkService2::class.java)
         }
-    }
+
 
 }
