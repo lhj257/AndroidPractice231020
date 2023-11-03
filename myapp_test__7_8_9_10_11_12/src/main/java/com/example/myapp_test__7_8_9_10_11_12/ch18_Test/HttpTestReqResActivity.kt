@@ -3,7 +3,9 @@ package com.example.myapp_test__7_8_9_10_11_12.ch18_Test
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp_test__7_8_9_10_11_12.R
+import com.example.myapp_test__7_8_9_10_11_12.ch18_Test.adapter.MyAdapterRetrofit
 import com.example.myapp_test__7_8_9_10_11_12.ch18_Test.model.UserListModel
 import com.example.myapp_test__7_8_9_10_11_12.ch18_Test.retrofit.MyApplication
 import com.example.myapp_test__7_8_9_10_11_12.databinding.ActivityHttpTestReqResBinding
@@ -112,7 +114,15 @@ class HttpTestReqResActivity : AppCompatActivity() {
                 //데이터를 성공적으로 받았을 때 수행되는 함수
                 val userList= response.body()
                 Log.d("lhj", "userList 의 값 : ${userList?.data}")
+
                 //데이터를 성공적으로 받았다면 여기서 리사이클러 뷰 어댑터에 연결하면 됨.
+                // 리사이클러뷰의 레이아웃 정하는 부분, 기본인 LinearLayoutManager 이용했고,
+                val layoutManager = LinearLayoutManager(this@HttpTestReqResActivity)
+                // 리사이클러뷰에 어댑터 연결
+                //인자값은 : 현재 context : this@HttpTestReqResActivity
+                // 2번째 인자값은 : 데이터 , 네트워크 ,레트로핏2 통신으로 받아온 데이터 리스트
+                binding.retrofitRecyclerView.layoutManager=layoutManager
+                binding.retrofitRecyclerView.adapter=MyAdapterRetrofit(this@HttpTestReqResActivity,userList?.data)
             }
 
             override fun onFailure(call: Call<UserListModel>, t: Throwable) {
