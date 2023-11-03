@@ -38,6 +38,7 @@ class SharedPrefDetailTestActivity : AppCompatActivity() {
             val editor = pref.edit()
             editor.remove("email")
             editor.remove("password")
+            editor.remove("pickRadio")
             editor.commit()
         }
 
