@@ -25,5 +25,5 @@ interface INetworkService {
     //@Url
     //기본 baseUrl 이 있지만, 다른 url 를 호출 할 때 사용.
     @GET
-    fun getAvataImage(@Url url: String) : Call<ResponseBody>
+    fun getAvatarImage(@Url url: String) : Call<ResponseBody>
 }
