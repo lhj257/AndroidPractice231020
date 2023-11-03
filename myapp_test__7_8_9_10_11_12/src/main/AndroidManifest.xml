@@ -24,7 +24,7 @@
         android:theme="@style/Theme.MyApplication_231020_test1">
         <activity
             android:name=".ch18_Test.HttpTestReqResActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ch17_Test.PreferenceTest.SharedPrefDetailTestActivity"
             android:exported="true" />
